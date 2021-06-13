@@ -1,0 +1,774 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>YourFit</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <!-- Font Awesome icons -->
+  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+
+ <!-- CSS -->
+ <link href="../static/public/innerpage-css/innerpage.css" rel="stylesheet">
+
+</head>
+<body>
+
+ <!-- Navigation -->
+ 
+ <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+   <div class="container">
+     <a class="navbar-brand" href="/">Home page</a>
+   </div>
+ </nav>
+ 
+ <header class="masthead text-center text-white">
+   <div class="masthead-content">
+     <div class="container">
+       <h1 class="masthead-heading mb-0">Size recommender</h1>
+       <h2 class="masthead-subheading mb-0">with each category</h2>
+       <a href="#products" class="btn btn-primary btn-xl rounded-pill mt-5">Choose category!</a>
+       <a href="/predict" class="btn btn-primary btn-xl rounded-pill mt-5">Find your size!</a>
+       <!-- <a href="/virtual" class="btn btn-primary btn-xl rounded-pill mt-5">Experiment outfits</a> -->
+       <!-- <a href="#" id = "temp" class="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a> -->
+     </div>
+   </div>
+   <div class="bg-circle-1 bg-circle"></div>
+   <div class="bg-circle-2 bg-circle"></div>
+   <div class="bg-circle-3 bg-circle"></div>
+   <div class="bg-circle-4 bg-circle"></div>
+ </header>
+
+<!-- Product Grid-->
+<section class="page-section bg-light" id="products">
+   <div class="container">
+       <div class="text-center">
+           <h2 class="section-heading text-uppercase">Products for female</h2>   
+       </div>
+       <div class="row">
+           <div class="col-lg-4 col-sm-6 mb-4">
+               <div class="product-item">
+                   <a class="product-link" data-toggle="modal" href="#productModal1">
+                      
+                       <img class="img-fluid" src="../static/public/innerpage-images\products\bcb1b07e-4014-4deb-9632-928a938b85381613714433516-1.webp" alt="..." />
+                   </a>
+                   <div class="product-caption">
+                       <div class="product-caption-heading">Skirt Mixi</div>
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-4 col-sm-6 mb-4">
+               <div class="product-item">
+                   <a class="product-link" data-toggle="modal" href="#productModal2">
+                      
+                       <img class="img-fluid" src="../static/public/innerpage-images\products\11519195992929-Roadster-Women-Maroon-Solid-Round-Neck-T-shirt-7951519195992737-1.webp" alt="..." />
+                   </a>
+                   <div class="product-caption">
+                       <div class="product-caption-heading">T-shirt</div>
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-4 col-sm-6 mb-4">
+               <div class="product-item">
+                   <a class="product-link" data-toggle="modal" href="#productModal3">
+                      
+                       <img class="img-fluid" src="../static/public/innerpage-images\products\11459942588510-Purple-Feather-Black-Pencil-Skirt-6751459942587971-1.webp" alt="..." />
+                   </a>
+                   <div class="product-caption">
+                       <div class="product-caption-heading">Skirt Midi</div>
+
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-4 col-sm-6 mb-4">
+               <div class="product-item">
+                   <a class="product-link" data-toggle="modal" href="#productModal4">
+                      
+                       <img class="img-fluid" src="../static/public/innerpage-images\products\ao_blouse.jpg" alt="..." />
+                   </a>
+                   <div class="product-caption">
+                       <div class="product-caption-heading">Blouses</div>
+                     
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-4 col-sm-6 mb-4">
+               <div class="product-item">
+                   <a class="product-link" data-toggle="modal" href="#productModal5">
+                            <img class="img-fluid" src="../static/public/innerpage-images\products\b574aacd-e526-404a-9730-4fa8f18d42c51562743724874-Kraus-Jeans-Women-Jeans-8221562743723166-1.webp" alt="..." />
+                   </a>
+                   <div class="product-caption">
+                       <div class="product-caption-heading">Jeans</div>
+                      
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-4 col-sm-6 mb-4">
+               <div class="product-item">
+                   <a class="product-link" data-toggle="modal" href="#productModal6">
+                       
+                       <img class="img-fluid" src="../static/public/innerpage-images\products\dress.webp" alt="..." />
+                   </a>
+                   <div class="product-caption">
+                       <div class="product-caption-heading">Dress Mixi</div>
+                      
+                   </div>
+               </div>
+           </div>
+           <!---
+           <div class="col-lg-4 col-sm-6 mb-4">
+               <div class="product-item">
+                   <a class="product-link" data-toggle="modal" href="#productModal7">
+                       <img class="img-fluid" src="../static/public/innerpage-images\products\dressmidi.jpg" alt="..." />
+
+                   </a>
+                   <div class="product-caption">
+                       <div class="product-caption-heading">Dress Midi</div>
+
+                   </div>
+
+               </div>
+           </div>
+        -->
+           
+       </div>
+   </div>
+</section>
+
+<!-- -------------------modals------------------- -->
+<!-- product Modals-->
+
+       <!-- Modal 1-->
+       <div class="product-modal modal fade" id="productModal1" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="container">
+
+                       <div class="row justify-content-center">
+                           <div class="col-lg-12">
+                               <div class="modal-body">
+                                   <!-- Project Details Go Here-->
+                                   <h2 class="text-uppercase">Have a similar product?</h2>
+                                   <p class="item-intro text-muted">Enter the size to get the most accurate fit for you!</p>
+                                   <div class="row">
+                                       <div class="col-lg-6">
+                                           <img class="img-fluid " src="../static/public/innerpage-images\products\measure a skirt.png" alt="..." />
+                                       </div>
+                                       <div class="col-lg-6">
+                                           <h4>Steps to Measure a Skirt:</h4>
+                                       <h5>
+                                           First Things First
+                                          
+                                       </h5>
+                                       <h6 style="font-weight: 350px"> Before we start with the measuring, lay down the garment on a flat hard surface and smooth out any wrinkles. </h6>                                     
+                                     
+                                       <p class ="text-left">
+                                           1><strong>Waist:</strong> Measure along the waist, make sure its laying flat on the ground when taking this measurement.  </br>
+                                           2><strong>Hip:</strong> This is the widest part of the hip, Measurement is taken approximately 7–9 inches (ca. 15-23 cm) below the natural waistline. The measurement is taken from side to side directly at the hip line. </br>
+                                           3><strong>Length:</strong>The length measurement is obtained from the top of the waist line to the bottom of the hemline.</li></br>
+                                           4><strong>Hem:</strong> Hem: This is length of the flare of your skirt. Flare is the bottom wide length of your dress.</br>
+                                           <strong>DONE!</strong></br>
+                                       </p>
+                                       </div>
+                                   </div>
+                               </div>
+
+                               <h4> Enter the measurement.</h4>
+                               <form id="form1">
+                                <div class="row">
+                                   
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="natural_waist1">Natural Waist(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="natural_waist1" placeholder="0" name="natural_waist">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="hip1">Hip(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="hip1" placeholder="30" name="hip">
+                                           </div>                                           
+                                         
+                                   </div>
+                                
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="low_waist">Low Waist(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="low_waist1" placeholder="40" name="low_waist">
+                                           </div>                                             
+                                   </div>
+                               </div> 
+                               <button class="btn btn-primary" type="submit" id= "submit1">Done</button>
+                               <button class="btn btn-primary" data-dismiss="modal" type="button" id="close1">Close</button>
+                             </div>
+                             </form>
+                       </div>
+                       <section class="container">
+                           <p><strong id ="result1"></strong></p>
+                       </section>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+
+       <!-- Modal 2-->
+       <div class="product-modal modal fade  " id="productModal2" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog ">
+               <!-- <div class="modal-content-instructions">
+                   <div class="close-modal" data-dismiss="modal"><img src="images\products\women.jpg" alt="Close modal" /></div>
+               </div> -->
+               <div class="modal-content">
+                   
+                   <div class="container">
+                       <div class="row justify-content-center">
+                           <div class="col-lg-12">
+                               <div class="modal-body">
+                                   <!-- Project Details Go Here-->
+                                   <h2 class="text-uppercase">Have a similar product?</h2>
+                                   <p class="item-intro text-muted">Enter the size to get the most accurate fit for you!</p>
+                                   <div class="row">
+                                       <div class="col-lg-6">
+                                           <img class="img-fluid " style="position: relative;" src="../static/public/innerpage-images\products\measure a T-shirt.png" alt="..." />
+                                       </div>
+                                       <div class="col-lg-6">
+                                           <h4>Steps to Measure a T-shirt:</h4>
+                                           <h5>
+                                               First Things First
+                                              
+                                           </h5>
+                                           <h6 style="font-weight: 350px"> Before we start with the measuring, lay down the garment on a flat hard surface and smooth out any wrinkles. </h6>                                     
+                                         
+                                           <p class ="text-left">
+                                               1><strong>Neck to Shoulder:</strong> Measure from middle of the neck to end of shoulder (where sleeve starts).</br>
+                                               2><strong>Sleeve length:</strong> Measure from the shoulder to the wrist. </br>
+                                               3><strong>Shoulder to Shoulder:</strong>Measure this length from one shoulder to another.</li></br>
+                                               4><strong>Chest:</strong>Place the tape close under the arms and measure while having the t-shirt laying flat.</li></br>
+                                               5><strong>Waist:</strong>Measure across the waist area while having the t-shirt laying flat.</li></br>
+                                               6><strong>Hem:</strong>Measure from one side to another.</li></br>
+                                               7><strong>Front Length:</strong>Measure from the highest point of the shoulder to the desired hemline.</li></br>
+                                               8><strong>Sleeve:</strong>At the widest point of the sleeve, measure its across while laying flat.</li></br>
+                                               <strong>DONE!</strong></br>
+                                           </p>
+                                       </div>
+                                   </div>
+                            
+                               </div>
+                               <h4> Enter the measurement.</h4>
+                               <form id="form2">
+                               <div class="row">
+                                   
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="bust2">Bust(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="bust2" placeholder="0" name="bust">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="sleevelen2">Sleeve Length(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="sleevelen2" placeholder="0" name="sleevelen">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="len2">Front Length(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="len2" placeholder="0" name="len">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="shoulder2">Chest(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="shoulder2" placeholder="0" name="shoulder">
+                                           </div>                                           
+                                         
+                                   </div>
+                                 
+                                   
+                                   
+                                
+                                </div>
+
+                               <button class="btn btn-primary"  type="submit" id="submit2">Done</button>
+                               <button class="btn btn-primary" data-dismiss="modal" type="button" id="close2">Close</button>
+                           </div>
+                           </form>
+                       </div>
+                       <section class="container">
+                           <p><strong id ="result2"></strong></p>
+                       </section>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- Modal 3-->
+       <div class="product-modal modal fade  " id="productModal3" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog ">
+               <!-- <div class="modal-content-instructions">
+                   <div class="close-modal" data-dismiss="modal"><img src="images\products\women.jpg" alt="Close modal" /></div>
+               </div> -->
+               <div class="modal-content">
+                   
+                   <div class="container">
+                       <div class="row justify-content-center">
+                           <div class="col-lg-12">
+                               <div class="modal-body">
+                                   <!-- Project Details Go Here-->
+                                   <h2 class="text-uppercase">Have a similar product?</h2>
+                                   <p class="item-intro text-muted">Enter the size to get the most accurate fit for you!</p>
+                                   <div class="row">
+                                       <div class="col-lg-6">
+                                           <img class="img-fluid " src="../static/public/innerpage-images\products\measure a skirt.png" alt="..." />
+                                       </div>
+                                       <div class="col-lg-6">
+                                           <h4>Steps to Measure a Skirt:</h4>
+                                       <h5>
+                                           First Things First
+                                          
+                                       </h5>
+                                       <h6 style="font-weight: 350px"> Before we start with the measuring, lay down the garment on a flat hard surface and smooth out any wrinkles. </h6>                                     
+                                     
+                                       <p class ="text-left">
+                                           1><strong>Waist:</strong> Measure along the waist, make sure its laying flat on the ground when taking this measurement.  </br>
+                                           2><strong>Hip:</strong> This is the widest part of the hip, Measurement is taken approximately 7–9 inches (ca. 15-23 cm) below the natural waistline. The measurement is taken from side to side directly at the hip line. </br>
+                                           3><strong>Length:</strong>The length measurement is obtained from the top of the waist line to the bottom of the hemline.</li></br>
+                                           4><strong>Hem:</strong> Hem: This is length of the flare of your skirt. Flare is the bottom wide length of your dress.
+                                           <br><strong>DONE!</strong></br>
+                                       </p>
+                                       </div>
+                                   </div>                                        
+                               </div>
+                               <h4> Enter the measurement.</h4>
+                               <form id="form3">
+                               <div class="row">
+                                   
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="natural_waist3">Natural Waist(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="natural_waist3" placeholder="0" name="natural_waist">
+                                           </div>                                           
+                                       
+                                   </div>
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="hip3">Hip(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="hip3" placeholder="0" name="hip">
+                                           </div>                                           
+                                       
+                                   </div>
+                                   
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="low_waist3">Low Waist(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="low_waist3" placeholder="0" name="low_waist">
+                                           </div>                                           
+                                       
+                                   </div>
+                                 </div>
+
+                               <button class="btn btn-primary" type="submit" id="submit3">Done</button>
+                               <button class="btn btn-primary" data-dismiss="modal" type="button" id="close3">Close</button>
+                           </div>
+                       </form>
+                       </div>
+                       <section class="container">
+                           <p><strong id ="result3"></strong></p>
+                       </section>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- Modal 4-->
+       <div class="product-modal modal fade  " id="productModal4" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog ">
+               <div class="modal-content">
+                   
+                   <div class="container">
+                       <div class="row justify-content-center">
+                           <div class="col-lg-12">
+                               <div class="modal-body">
+                                   <!-- Project Details Go Here-->
+                                   <h2 class="text-uppercase">Have a similar product?</h2>
+                                   <p class="item-intro text-muted">Enter the size to get the most accurate fit for you!</p>
+                                   <div class="row">
+                                       <div class="col-lg-6">
+                                           <img class="img-fluid " src="../static/public/innerpage-images\products\measure a T-shirt.png" alt="..." />
+                                       </div>
+                                       <div class="col-lg-6">
+                                           <h4>Steps to Measure a T-shirt:</h4>
+                                           <h5>
+                                               First Things First
+                                              
+                                           </h5>
+                                           <h6 style="font-weight: 350px"> Before we start with the measuring, lay down the garment on a flat hard surface and smooth out any wrinkles. </h6>                                     
+                                         
+                                           <p class ="text-left">
+                                               1><strong>Neck to Shoulder:</strong> Measure from middle of the neck to end of shoulder (where sleeve starts).</br>
+                                               2><strong>Sleeve length:</strong> Measure from the shoulder to the wrist. </br>
+                                               3><strong>Shoulder to Shoulder:</strong>Measure this length from one shoulder to another.</li></br>
+                                               4><strong>Chest:</strong>Place the tape close under the arms and maeasure while having the t-shirt laying flat.</li></br>
+                                               5><strong>Waist:</strong>Measure across the waist area while having the t-shirt laying flat.</li></br>
+                                               6><strong>Hem:</strong>Measure from one side to another.</li></br>
+                                               7><strong>Front Length:</strong>Measure from the highest point of the shoulder to the desired hemline.</li></br>
+                                               8><strong>Sleeve:</strong>At the widest point of the sleeve, measure its across while laying flat.</li></br>
+                                               <strong>DONE!</strong></br>
+                                           </p>
+                                       </div>
+                                   </div>
+                            
+                               </div>
+                               <h4> Enter the measurement.</h4>
+                               <form id="form4">
+                               <div class="row">
+                                   
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="bust4">Bust(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="bust4" placeholder="0" name="bust">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="sleevelen4">Sleeve Length(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="sleevelen4" placeholder="0" name="sleevelen">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="len4">Front Length(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="len4" placeholder="0" name="len">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="shoulder2">Chest(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="shoulder2" placeholder="0" name="shoulder">
+                                           </div>                                           
+                                         
+                                   </div>
+                                </div>
+                               <button class="btn btn-primary" type="submit" id="submit4">Done</button>
+                               <button class="btn btn-primary" data-dismiss="modal" type="button" id="close4">Close</button>
+
+                           </div>
+                       </form>
+                       </div>
+                       <section class="container">
+                           <p><strong id ="result4"></strong></p>
+                       </section>
+                   </div>
+               </div>
+           </div>
+       </div>
+      
+       <!-- Modal 5-->
+       <div class="product-modal modal fade  " id="productModal5" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog ">
+               <div class="modal-content">
+                   
+                   <div class="container">
+                       <div class="row justify-content-center">
+                           <div class="col-lg-12">
+                               <div class="modal-body">
+                                   <!-- Project Details Go Here-->
+                                   <h2 class="text-uppercase">Have a similar product?</h2>
+                                   <p class="item-intro text-muted">Enter the size to get the most accurate fit for you!</p>
+                                   
+                                   <div class="row">
+                                       <div class="col-lg-6">
+                                           <img class="img-fluid " src="../static/public/innerpage-images\products\measure jeans- (2).png" alt="..." />
+                                       </div>
+                                       <div class="col-lg-6">
+                                           <h4>Steps to Measure a Jeans:</h4>
+                                           <h5>
+                                               First Things First
+                                              
+                                           </h5>
+                                           <h6 style="font-weight: 350px"> Before we start with the measuring, lay down the garment on a flat hard surface and smooth out any wrinkles. </h6>                                     
+                                           <p class ="text-left">
+                                               1><strong>Waist:</strong>For measuring the waist first button the jeans up. Next spread the jeans flat on the surface, and remove any fullness and wrinkles from it.‍</br>
+                                               2><strong>Front Rise:</strong>With the jeans buttoned up, spread the jeans on the floor or table; next remove all wrinkles, and measure this region by starting from crotch seam spot to the spot of waist band.‍<br>
+                                               3><strong>Hip:</strong>Measure across the hip area, this is in most cases 1 1/2 inches below the zipper.‍ </br>
+                                               4><strong>Thigh:</strong>Starting at the crotch seam and ending 1-2 inches below the hip area.‍</br>
+                                               5><strong>Length:</strong>With the jeans buttoned up, spread the jeans on a table, floor or any other flat surface, with outseam on both corners. After removing all wrinkles and any fullness, measure the length from the top of the waistband.‍</br>
+                                               6><strong>Knee:</strong>Next remove any wrinkles and fullness if present. Measure across the knee area.‍</br>
+                                               7><strong>Inseam:</strong>Having the jeans buttoned up, spread the jeans on a surface flat. Now measure the inseam gap from the crotch, at the spot where the front and back seams meet, exactly where, depends on the length you desire ultimately.‍</br>
+                                               8><strong>Leg Opening:</strong>Now in the last step follow the same pattern as the previous steps, that is spread the jeans on a flat surface e.g. table or floor. After removing any fullness or wrinkles, start measurement beginning from one side of leg opening to the other side of leg opening.</br>
+                                               <strong>DONE!</strong></br>
+                                           </p>
+                                       </div>
+                                   </div>
+                                  
+                               </div>
+                               <h4> Enter the measurement.</h4>
+                               <form id="form5">
+                               <div class="row">
+                                   
+                                   <div class="col-sm-3" >
+                                       
+                                           <div class="form-group">
+                                             <label for="waist5">Waist(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="waist5" placeholder="0" name="waist">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   
+                                   
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="hip5">Hip(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="hip5" placeholder="0" name="hip">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <div class="col-sm-3">
+                                       
+                                           <div class="form-group">
+                                             <label for="thigh5">Thigh(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="thigh5" placeholder="0" name="thigh">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   
+                                   <!--<div class="w-100"></div>-->
+                               
+                                   
+                                   
+                               </div>
+
+                               <button class="btn btn-primary" type="submit" id="submit5">Done</button>
+                               <button class="btn btn-primary" data-dismiss="modal" type="button" id="close5">Close</button>
+                            </div>
+                       </form>
+                       </div>
+                       <section class="container">
+                           <p><strong id ="result5"></strong></p>
+                       </section>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- Modal 6-->
+       <div class="product-modal modal fade  " id="productModal6" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="modal-dialog ">
+               <div class="modal-content">
+                   
+                   <div class="container">
+                       <div class="row justify-content-center">
+                           <div class="col-lg-12">
+                               <div class="modal-body">
+                                   <!-- Project Details Go Here-->
+                                   <h2 class="text-uppercase">Have a similar product?</h2>
+                                   <p class="item-intro text-muted">Enter the size to get the most accurate fit for you!</p>
+                                   
+                                   <div class="row">
+                                       <div class="col-lg-6">
+                                           <img class="img-fluid " src="../static/public/innerpage-images\products\measure a dress-.png" alt="..." />
+                                       </div>
+                                       <div class="col-lg-6">
+                                           <h4>Steps to Measure a Dress:</h4>
+                                           <h5>
+                                               First Things First
+                                              
+                                           </h5>
+                                           <h6 style="font-weight: 350px"> Before we start with the measuring, lay down the garment on a flat hard surface and smooth out any wrinkles. </h6>                                     
+                                           <p class ="text-left">
+                                               1><strong>Bust:</strong> The measurement is taken from side seam to side seam directly under the armhole or sleeve.</br>
+                                               2><strong>Waist:</strong> This is the smallest part of your waist. The measurement is taken from side to side directly at the waistline </br>
+                                               3><strong>Hip:</strong>This is the widest part of your hip, across the hipbone. Measurement is taken approximately 7–9 inches below the natural waistline. The measurement is taken from side to side directly at the hip line</li></br>
+                                               4><strong>Flare:</strong>This is length of the flare of your dress. Flare is the bottom wide length of your dress.</br>
+                                               5><strong>Strap to Hem: </strong>This measurement is obtained from the top of the strap down to the hem.</li></br>
+                                               6><strong>Waist to Hem:</strong>The length measurement is obtained from the top of the waistband to the bottom of the hemline.</li></br>
+                                               <strong>DONE!</strong></br>
+                                           </p>
+                                       </div>
+                                   </div>
+                                  
+                               </div>
+                               <h4> Enter the measurement.</h4>
+                               <form id="form6">
+                               <div class="row">
+                                   
+                                   <div class="col-sm-4" >
+                                       
+                                           <div class="form-group">
+                                             <label for="bust6">Bust(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="form6" placeholder="0" name= "bust">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <div class="col-sm-4" >
+                                       
+                                           <div class="form-group">
+                                             <label for="waist6">Waist(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="waist6" placeholder="0" name= "waist">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   
+                                   <div class="col-sm-4">
+                                       
+                                           <div class="form-group">
+                                             <label for="hip6">Hip(in cm)</label>
+                                             <input type="number" step="0.01" class="form-control" id="hip6" placeholder="0" name= "hip">
+                                           </div>                                           
+                                         
+                                   </div>
+                                   <!--<div class="w-100"></div>-->
+                                       
+                               </div>
+                               <div class="text-center">
+                                   <button class="btn btn-primary" type="submit" id="submit6">Done</button>
+                                   <button class="btn btn-primary" data-dismiss="modal" type="button" id="close6">Close</button>
+                              </div>
+                           </form>
+                       </div>
+                       <section class="container">
+                           <p><strong id ="result6"></strong></p>
+                       </section>
+                   </div>
+               </div>
+           </div>
+       </div>
+       
+    
+
+       <div class="product-modal modal fade  " id="productModal7" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content">
+                
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here-->
+                                <h2 class="text-uppercase">Have a similar product?</h2>
+                                <p class="item-intro text-muted">Enter the size to get the most accurate fit for you!</p>
+                                
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <img class="img-fluid " src="../static/public/innerpage-images\products\measure a dress-.png" alt="..." />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h4>Steps to Measure a Dress:</h4>
+                                        <h5>
+                                            First Things First
+                                           
+                                        </h5>
+                                        <h6 style="font-weight: 350px"> Before we start with the measuring, lay down the garment on a flat hard surface and smooth out any wrinkles. </h6>                                     
+                                        <p class ="text-left">
+                                            1><strong>Bust:</strong> The measurement is taken from side seam to side seam directly under the armhole or sleeve.</br>
+                                            2><strong>Waist:</strong> This is the smallest part of your waist. The measurement is taken from side to side directly at the waistline </br>
+                                            3><strong>Hip:</strong>This is the widest part of your hip, across the hipbone. Measurement is taken approximately 7–9 inches below the natural waistline. The measurement is taken from side to side directly at the hip line</li></br>
+                                            4><strong>Flare:</strong>This is length of the flare of your dress. Flare is the bottom wide length of your dress.</br>
+                                            5><strong>Strap to Hem: </strong>This measurement is obtained from the top of the strap down to the hem.</li></br>
+                                            6><strong>Waist to Hem:</strong>The length measurement is obtained from the top of the waistband to the bottom of the hemline.</li></br>
+                                            <strong>DONE!</strong></br>
+                                        </p>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <h4> Enter the measurement.</h4>
+                            <form id="form7">
+                                <div class="row">
+                                
+                                    <div class="col-sm-4" >
+                                    
+                                            <div class="form-group">
+                                                <label for="bust7">Bust(in cm)</label>
+                                                <input type="number" step="0.01" class="form-control" id="form7" placeholder="0" name= "bust">
+                                            </div>                                           
+                                      
+                                    </div>
+                                    <div class="col-sm-4" >
+                                    
+                                        <div class="form-group">
+                                          <label for="waist7">Waist(in cm)</label>
+                                          <input type="number" step="0.01" class="form-control" id="waist7" placeholder="0" name= "waist">
+                                        </div>                                           
+                                      
+                                    </div>
+                                
+                                    <div class="col-sm-4">
+                                    
+                                        <div class="form-group">
+                                          <label for="hip7">Hip(in cm)</label>
+                                          <input type="number" step="0.01" class="form-control" id="hip7" placeholder="0" name= "hip">
+                                        </div>                                           
+                                      
+                                    </div>
+                                    <!--<div class="w-100"></div>-->
+                                    
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="submit" id="submit6">Done</button>
+                                    <button class="btn btn-primary" data-dismiss="modal" type="button" id="close6">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                        <section class="container">
+                            <p><strong id ="result7"></strong></p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Footer-->
+<footer class="py-5 bg-black">
+   <div class="container">
+     <p class="m-0 text-center text-white small">Copyright &copy; SizeFit, 2020</p>
+   </div>
+ </footer>
+
+
+ <!-- Bootstrap core JavaScript-->   
+ <script src="../static/sizes_female.js"></script>
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+ 
+</body>
+</html>
