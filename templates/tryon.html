@@ -84,7 +84,7 @@
                 <img src="../static/public/anh-tach-nen/Dress/IMG_4978.png" alt="..." height="500" width="300">
                 
                 <div class="caption">
-                    <form action="/result   " method="GET">
+                    <form action="/result   " method="GET" onsubmit="myFunction()">
                         <input type="hidden" id="iid" value="4978" name="iid" size="12">
                         <input type="hidden" id="category" value="DRESS-long sleeve dress" name="category" size="10">
                         <button class="btn btn-success" type="submit">Try on</button>
@@ -93,7 +93,9 @@
                         <button class="btn btn-success" type="submit">Result</button>
                     </a>
                 </div>
-                
+                <br>
+                    {{messge}}
+                <br>
             </div>
             
             <div class="figure">
@@ -328,7 +330,7 @@
                 </div>
             </div>
        </div>
-
+       <script src="../static/time.js"></script>
        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
