@@ -1,8 +1,10 @@
+from pydantic.errors import NotNoneError
 from pydantic.types import Json
 from pymongo import MongoClient, message
 from bson.objectid import ObjectId
 from pydantic import BaseModel
 from database.utils import norm_dict
+from typing import Optional
 
 URL = "mongodb+srv://hieule:0982298387@cluster0.qbwn8.gcp.mongodb.net"
 NAME_DB = "ecommerce"
@@ -127,4 +129,8 @@ class ItemSchema(BaseModel):
     
     allow: str
 
+class ItemTryon(BaseModel):
+    
+    iid_ao: Optional[str] = None
+    iid_quan: Optional[str] = None
 
