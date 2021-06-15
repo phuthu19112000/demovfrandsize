@@ -131,6 +131,6 @@ class ItemSchema(BaseModel):
 
 class ItemTryon(BaseModel):
     
-    iid_ao: Optional[str] = None
-    iid_quan: Optional[str] = None
+    iid_ao: Optional[str] = "200"
+    iid_quan: Optional[str] = "300"
 

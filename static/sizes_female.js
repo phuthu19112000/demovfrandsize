@@ -10,6 +10,10 @@ uksizes.set(14,"XL");
 uksizes.set(16,"XXL");
 uksizes.set(18,"XXL");
 
+function cm(inches){
+    return (2.54*inches);
+}
+
 const skirtSizeChart=[
     {"size":4, "natural_waist": 60.5, "low_waist": 77, "hip": 85.5},
     {"size":6, "natural_waist": 64.5, "low_waist": 81, "hip": 89.5},
@@ -59,9 +63,7 @@ const tshirtSizeChart=[
     {"size":"XXL", "bust": cm(41), "len": cm(28), "shoulder": cm(19), "sleevelen": cm(8), "sleeveopen": cm(7)}
 ]
 
-function cm(inches){
-    return (2.54*inches);
-}
+
 
 const getSkirtSize = function(skirtSizeChart,form){
     let input = fillInputArray(form);

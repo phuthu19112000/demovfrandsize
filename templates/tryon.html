@@ -81,10 +81,10 @@
         <div class="row">
             <div class="figure">
                 
-                <img src="../static/public/anh-tach-nen/Dress/IMG_4978.png" alt="..." height="500" width="300">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4978.png" alt="..." height="500" width="270">
                 
                 <div class="caption">
-                    <form action="/result   " method="GET" onsubmit="myFunction()">
+                    <form id="id1" action="/result   " method="GET">
                         <input type="hidden" id="iid" value="4978" name="iid" size="12">
                         <input type="hidden" id="category" value="DRESS-long sleeve dress" name="category" size="10">
                         <button class="btn btn-success" type="submit">Try on</button>
@@ -96,7 +96,7 @@
             </div>
             
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Dress/IMG_4991-1.png" alt="..." height="500" width="300">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4991-1.png" alt="..." height="500" width="230">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="4991" name="iid" size="12">
@@ -111,7 +111,7 @@
             </div>
 
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Dress/IMG_4993-1.png" alt="..." height="500" width="300">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4993-1.png" alt="..." height="500" width="230">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="4993" name="iid">
@@ -126,7 +126,7 @@
             </div>
 
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Dress/IMG_4998-1.png" alt="..." height="500" width="300">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4998-1.png" alt="..." height="500" width="250">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="4998" name="iid">
@@ -154,7 +154,7 @@
             </div>
             
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Dress/IMG_5004-1.png" alt="..." height="500" width="300">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_5004-1.png" alt="..." height="500" width="250">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="5004" name="iid">
@@ -187,7 +187,7 @@
         </div>
         <div class="row">
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Top/IMG_4984-1.png" alt="..." height="350" width="300">
+                <img src="../static/public/anh-tach-nen/Top/IMG_4984-1.png" alt="..." height="350" width="250">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="4984" name="iid" size="12">
@@ -201,7 +201,7 @@
             </div>
 
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Top/IMG_4988-1.png" alt="..." height="350" width="300">
+                <img src="../static/public/anh-tach-nen/Top/IMG_4988-1.png" alt="..." height="300" width="300">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="4988" name="iid" size="12">
@@ -229,7 +229,7 @@
             </div>
 
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Top/IMG_5011-1.png" alt="..." height="350" width="300">
+                <img src="../static/public/anh-tach-nen/Top/IMG_5011-1.png" alt="..." height="350" width="260">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="5011" name="iid" size="12">
@@ -271,7 +271,7 @@
             </div>
 
             <div class="figure">
-                <img src="../static/public/anh-tach-nen/Top/IMG_5014-1.png" alt="..." height="350" width="300">
+                <img src="../static/public/anh-tach-nen/Top/IMG_5014-1.png" alt="..." height="350" width="270">
                 <div class="caption">
                     <form action="/result" method="GET">
                         <input type="hidden" id="iid" value="5014" name="iid" size="12">
@@ -327,6 +327,15 @@
                 </div>
             </div>
        </div>
+
+       <script>
+           $('#id1').submit(function() { 
+                // submit the form 
+                $(this).ajaxSubmit(); 
+                // return false to prevent normal browser submit and page navigation 
+                return false; 
+            });
+       </script>
        <script src="../static/time.js"></script>
        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

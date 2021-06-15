@@ -31,7 +31,6 @@ data = {
     "body": 4985
     }
 
-cache_DRESS = []
 cache_TOP = []
 cache_PANTS = []
 cache_SKIRT = []
@@ -56,6 +55,10 @@ async def api_findsize(request: Request):
     """
     return templates.TemplateResponse("index.html", {"request":request})
 
+iid_ao_default = 5011
+category_ao_default = "short_sleeve_top"
+iid_quan_default = 4990
+category_quan_default = "trousers"
 
 #TRY ON
 @router.get("/tryon", response_class=HTMLResponse)
@@ -67,7 +70,7 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
     """
     with each certain pants or shirt, proceed to try on the mannequin and return, display image to UI 
     """
-
+    
     category = category.split("-")
     cat = category[0]
     value = category[1].replace(" ","_")
@@ -81,23 +84,32 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
     elif cat == "TOP":
         data["id_ao"] = iid
         data["category_ao"] = value
+        cache_TOP.append(data["id_ao"])
         if cache_PANTS == [] or cache_SKIRT == []:
             #image = plt.imread(src_result + "Top/IMG_{}.png".format(iid))
-            shutil.copy(src_result + "Top/IMG_{}.png".format(iid),src_result + "result.png") 
+            #shutil.copy(src_result + "Top/IMG_{}.png".format(iid),src_result + "result.png") 
+            data["id_quan"] = iid_quan_default
+            data["category_quan"] = category_quan_default
 
     elif cat == "PANTS":
         data["id_quan"] = iid
         data["category_quan"] = value
-        if cache_PANTS == []:
-            shutil.copy(src_result + "Pants/IMG_{}.png".format(iid),src_result + "result.png")
         cache_PANTS.append(data["id_quan"])
+        if cache_TOP == []:
+            #shutil.copy(src_result + "Pants/IMG_{}.png".format(iid),src_result + "result.png")
+            #cache_PANTS.append(data["id_quan"])
+            data["id_ao"] = iid_ao_default
+            data["category_ao"] = category_ao_default
 
     elif cat == "SKIRT":
         data["id_quan"] = iid
         data["category_quan"] = value
-        if cache_SKIRT == []:
-            shutil.copy(src_result + "Skirt/IMG_{}.png".format(iid),src_result + "result.png")
         cache_SKIRT.append(data["id_quan"])
+        if cache_TOP == []:
+            #shutil.copy(src_result + "Skirt/IMG_{}.png".format(iid),src_result + "result.png")
+            #cache_SKIRT.append(data["id_quan"])
+            data["id_ao"] = iid_ao_default
+            data["category_ao"] = category_ao_default
 
     url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(data["id_quan"],data["category_quan"],data["id_ao"],data["category_ao"],data["body"])
     print(url)
@@ -112,8 +124,8 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
     message = "DONE!"
     return templates.TemplateResponse("tryon.html",{"request":request,"message":message})
 
-@router.post("/tryon_stateless")
-async def api_get_result_main(items:ItemTryon):
+@router.post("/tryon_stateless/")
+async def api_get_result_main(items:ItemTryon) -> dict:
     
     if items.iid_ao == None and items.iid_quan == None:
         #TODO: return canh mac quan ao mac dinh
@@ -136,3 +148,5 @@ async def api_get_result_main(items:ItemTryon):
         result = response.content
         image = base64.b64decode(result)
         return FileResponse(image,media_type="image/png")
+    
+    return {"iid_ao":items.iid_ao, "iid_quan": items.iid_quan}
