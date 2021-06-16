@@ -1,5 +1,6 @@
 import shutil
 from typing import Optional
+from pydantic.networks import int_domain_regex
 import requests
 import base64
 
@@ -31,6 +32,7 @@ data = {
     "body": 4985
     }
 
+cache_DRESS = []
 cache_TOP = []
 cache_PANTS = []
 cache_SKIRT = []
@@ -63,7 +65,7 @@ category_quan_default = "trousers"
 #TRY ON
 @router.get("/tryon", response_class=HTMLResponse)
 async def tryon_page(request: Request):
-    return templates.TemplateResponse("tryon.html",{"request":request})
+    return templates.TemplateResponse("tryon-fix.html",{"request":request})
 
 @router.get("/result")
 async def api_get_result_tryon(iid:str, category: str , request: Request):
@@ -80,6 +82,7 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
         data["category_ao"] = value
         data["id_quan"] = iid
         data["category_quan"] = value
+        cache_DRESS.append(data["id_ao"])
 
     elif cat == "TOP":
         data["id_ao"] = iid
@@ -105,12 +108,12 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
         data["id_quan"] = iid
         data["category_quan"] = value
         cache_SKIRT.append(data["id_quan"])
-        if cache_TOP == []:
+        if cache_TOP == [] or cache_DRESS != []:
             #shutil.copy(src_result + "Skirt/IMG_{}.png".format(iid),src_result + "result.png")
             #cache_SKIRT.append(data["id_quan"])
             data["id_ao"] = iid_ao_default
             data["category_ao"] = category_ao_default
-
+    
     url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(data["id_quan"],data["category_quan"],data["id_ao"],data["category_ao"],data["body"])
     print(url)
     response = requests.get(url=url)
@@ -120,33 +123,44 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
     
     with open(filename, 'wb') as f:
         f.write(image)
+    print(data)
 
     message = "DONE!"
     return templates.TemplateResponse("tryon.html",{"request":request,"message":message})
 
-@router.post("/tryon_stateless/")
-async def api_get_result_main(items:ItemTryon) -> dict:
-    
-    if items.iid_ao == None and items.iid_quan == None:
-        #TODO: return canh mac quan ao mac dinh
-        pass
-    
-    if items.iid_ao == None and items.iid_quan != None:
-        #TODO: return canh mac iid_quan va ao mac dinh
-        pass
 
-    if items.iid_ao != None and items.iid_quan == None:
-        #TODO: return canh mac iid_ao va quan mac dinh
-        pass
-
-    if items.iid_ao != None and items.iid_quan != None:
-        #TODO: return canh mac iid_ao va iid_quan
-        info_iid_ao = it.get_item_info(items.iid_ao)
-        info_iid_quan = it.get_item_info(items.iid_quan)
-        url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(items.iid_quan, info_iid_quan["category"], items.iid_ao, info_iid_ao["category"], 4985)
-        response = requests.get(url=url)
-        result = response.content
-        image = base64.b64decode(result)
-        return FileResponse(image,media_type="image/png")
+# @router.get("/tryon_stateless/")
+# async def api_get_result_main(items:ItemTryon) -> dict:
     
-    return {"iid_ao":items.iid_ao, "iid_quan": items.iid_quan}
+#     if items.iid_ao == None and items.iid_quan == None:
+#         #TODO: return canh mac quan ao mac dinh
+#         pass
+    
+#     if items.iid_ao == None and items.iid_quan != None:
+#         #TODO: return canh mac iid_quan va ao mac dinh
+#         pass
+
+#     if items.iid_ao != None and items.iid_quan == None:
+#         #TODO: return canh mac iid_ao va quan mac dinh
+#         pass
+
+#     if items.iid_ao != None and items.iid_quan != None:
+#         #TODO: return canh mac iid_ao va iid_quan
+#         info_iid_ao = it.get_item_info(items.iid_ao)
+#         info_iid_quan = it.get_item_info(items.iid_quan)
+#         url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(items.iid_quan, info_iid_quan["category"], items.iid_ao, info_iid_ao["category"], 4985)
+#         response = requests.get(url=url)
+#         result = response.content
+#         image = base64.b64decode(result)
+#         return FileResponse(image,media_type="image/png")
+    
+#     return {"iid_ao":items.iid_ao, "iid_quan": items.iid_quan}
+
+@router.get("/tryon_stateless/")
+async def api_get_result_main(iid_ao: Optional[str] = 300, iid_quan: Optional[str] = 300) -> dict:
+    
+    if iid_ao == 300 and iid_quan == 300:
+        pass
+    
+    #return {"iid_ao":iid_ao, "iid_quan": iid_quan}
+    return FileResponse("static/public/anh-tach-nen/image.png")

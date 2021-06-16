@@ -27,21 +27,38 @@
        
      </head>
      <style>
+         
+
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            }
+
         #just-line-break {
             white-space: pre-line;
         }
 
-        .figure {
+        .row {
             text-align: center;
+            display: block;
         }
         .button {
-            background-color: rgb(47, 255, 109) ;
+            background-color: rgb(54, 255, 47) ;
             position: relative;
         }
         .caption {
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .aligh{
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
         }
       </style>
      <body>
@@ -55,13 +72,9 @@
             <div class="masthead-content">
               <div class="container">
                 <h3 class="masthead-heading mb-0">Virtual Fitting Room</h3>
-                <a href="#center" class="btn btn-primary btn-xl rounded-pill mt-5">Choose category!</a>
+                
               </div>
             </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
         </header>
 
         <!--
@@ -73,205 +86,207 @@
         <div class="text-center">
             <h2 class="section-heading text-uppercase">DRESS</h2>
         </div>
-        <div class="row">
+        
+        <form action="/tryon_stateless", method="GET">
+          <div class="row">
             <div class="figure">
                 
-                <img src="../static/public/tryon-image/anh-tach-nen/Dress/IMG_4978.png" alt="..." height="400" width="300">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4978.png" alt="..." height="400" width="200">
                 
                 <div class="caption">
+                        <input type="radio" id="iid_ao" value="4978" name="iid_ao" size="12">
+                        <label for="iid_ao">4978</label><br><br>
+                        <input type=button value="Uncheck" onclick="document.getElementById('iid_ao').checked = false"><br><br>
+                    <!--
+                      <a class="product-link" data-toggle="modal" href="#productModal1">
+                        <button class="btn btn-success" type="submit">Result</button>
+                      </a>
+                    -->
+                </div>
+            </div>
+            
+            <div class="figure">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4991-1.png" alt="..." height="400" width="180">
+                <div class="caption">
                     
+                        <input type="radio" id="iid_ao" value="4991" name="iid_ao" size="12">
+                        <label for="iid_ao">4991</label><br>
                     
-                    <input class="btn btn-warning" type="hidden" id="iid" value="IMG_4978.png" name="iid" size="12">
-                    <input class="btn btn-warning" type="hidden" id="category" value="Dress" name="category" size="10">
-                    <button class="btn btn-success"  onclick="perform_tryon()">Try on</button>
-                   
-                    <a class="product-link" data-toggle="modal" href="#productModal1">
-                        <button class="button" type="submit">Result</button>
-                    </a>
                 </div>
                 
             </div>
-            
+
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Dress/IMG_4991-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_4991-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Dress" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4993-1.png" alt="..." height="400" width="180">
+                <div class="caption">
+                    
+                        <input type="radio" id="iid_ao" value="4993" name="iid_ao">
+                        <label for="iid_ao">4993</label><br>
+                    
+                </div>
             </div>
 
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Dress/IMG_4993-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_4993-1.png" name="iid">
-                    <input type="hidden" id="category" value="Dress" name="category">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+                <img src="../static/public/anh-tach-nen/Dress/IMG_4998-1.png" alt="..." height="400" width="180">
+                <div class="caption">
+                    
+                        <input type="radio" id="iid_ao" value="4998" name="iid_ao">
+                        <label for="iid_ao">4998</label><br>
+                    
+                </div>
             </div>
 
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Dress/IMG_4998-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_4998-1.png" name="iid">
-                    <input type="hidden" id="category" value="Dress" name="category">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+                <img src="../static/public/anh-tach-nen/Dress/IMG_5002-1.png" alt="..." height="400" width="250">
+                <div class="caption">
+                    
+                        <input type="radio" id="iid_ao" value="5002" name="iid_ao">
+                        <label for="iid_ao">5022</label><br>
+                    
+                </div>
+            </div>
+            <div class="figure">
+                <img src="../static/public/anh-tach-nen/Dress/IMG_5004-1.png" alt="..." height="400" width="200">
+                <div class="caption">
+                    
+                        <input type="radio" id="iid_ao" value="5004" name="iid_ao">
+                        <label for="iid_ao">5022</label><br>
+                    
+                </div>
             </div>
 
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Dress/IMG_5002-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5002-1.png" name="iid">
-                    <input type="hidden" id="category" value="Dress" name="category">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+                <img src="../static/public/anh-tach-nen/Dress/IMG_5005-1.png" alt="..." height="400" width="230">
+                <div class="caption">
+                    
+                        <input type="radio" id="iid_ao" value="5005" name="iid_ao">
+                        <label for="iid_ao">5005</label><br>
+                    
+                </div>
             </div>
-            
-            <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Dress/IMG_5004-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5004-1.png" name="iid">
-                    <input type="hidden" id="category" value="Dress" name="category">
-                    <button class="button" type="submit">Try on</button>
-                </form>
-            </div>
+          </div>
 
-            <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Dress/IMG_5005-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5005-1.png" name="iid">
-                    <input type="hidden" id="category" value="Dress" name="category">
-                    <button class="button" type="submit">Try on</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="just-line-break" class="text-center">
+          <div id="just-line-break" class="text-center">
             <h2 class="section-heading text-uppercase">TOP</h2>
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Top/IMG_4984-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_4984-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Top" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+                <img src="../static/public/anh-tach-nen/Top/IMG_4984-1.png" alt="..." height="250" width="180">
+                <div class="caption">
+                  
+                      <input type="radio" id="iid_ao" value="4984" name="iid_ao" size="12">
+                      <label for="iid_ao">4984</label><br>
+                  
+                </div>
             </div>
 
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Top/IMG_4988-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_4988-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Top" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+              <img src="../static/public/anh-tach-nen/Top/IMG_4988-1.png" alt="..." height="250" width="250">
+              <div class="caption">
+                  
+                      <input type="radio" id="iid_ao" value="4988" name="iid_ao" size="12">
+                      <label for="iid_ao">4988</label><br>
+                  
+              </div>
             </div>
 
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Top/IMG_5010-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5010-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Top" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+              <img src="../static/public/anh-tach-nen/Top/IMG_5010-1.png" alt="..." height="250" width="210">
+              <div class="caption">
+                  
+                      <input type="radio" id="iid_ao" value="5010" name="iid_ao" size="12">
+                      <label for="iid_ao">5010</label><br>
+          
+              </div>
             </div>
-
+          
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Top/IMG_5011-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5011-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Top" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+              <img src="../static/public/anh-tach-nen/Top/IMG_5011-1.png" alt="..." height="250" width="205">
+              <div class="caption">
+                  
+                      <input type="radio" id="iid_ao" value="5011" name="iid_ao" size="12">
+                      <label for="iid_ao">5011</label><br>
+                  
+              </div>
             </div>
-
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Top/IMG_5012-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5012-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Top" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+              <img src="../static/public/anh-tach-nen/Top/IMG_5012-1.png" alt="..." height="250" width="220">
+              <div class="caption">
+                  
+                      <input type="radio" id="iid_ao" value="5012" name="iid_ao" size="12">
+                      <label for="iid_ao">5012</label><br>
+                  
+              </div>
             </div>
-
+          
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Top/IMG_5013-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5013-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Top" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+              <img src="../static/public/anh-tach-nen/Top/IMG_5013-1.png" alt="..." height="250" width="220">
+              <div class="caption">
+                  
+                      <input type="radio" id="iid_ao" value="5013" name="iid_ao" size="12">
+                      <label for="iid_ao">5013</label><br>
+                  
+              </div>
             </div>
-
+          
             <div class="figure">
-                <img src="../static/public/tryon-image/anh-tach-nen/Top/IMG_5014-1.png" alt="..." height="400" width="300">
-                <form action="/result" method="GET">
-                    <input type="hidden" id="iid" value="IMG_5014-1.png" name="iid" size="12">
-                    <input type="hidden" id="category" value="Top" name="category" size="10">
-                    <button class="button" type="submit">Try on</button>
-                </form>
+              <img src="../static/public/anh-tach-nen/Top/IMG_5014-1.png" alt="..." height="250" width="200">
+              <div class="caption">
+                      <input type="radio" id="iid_ao" value="5014" name="iid_ao" size="12">
+                      <label for="iid_ao">5014</label><br>
+              </div>
             </div>
-        </div>
+          </div>
 
+          <div class="text-center">
+              <h2 class="section-heading text-uppercase">PANTS</h2>
+              <img src="../static/public/anh-tach-nen/Pants/IMG_4990-1.png" alt="..." height="400" width="200">
+              <div class="caption">
+                
+                    <input type="radio" id="iid_quan" value="4990" name="iid_quan">
+                    <label for="iid_quan">4990</label>
+                
+              </div>
+          </div>
 
-        <div id="just-line-break" class="text-center">
-            <h2 class="section-heading text-uppercase">PANTS</h2>
-            <img src="../static/public/tryon-image/anh-tach-nen/Pants/IMG_4990-1.png" alt="..." height="400" width="300">
-            <form action="/result" method="GET">
-                <input type="hidden" id="iid" value="IMG_4990-1.png" name="iid">
-                <input type="hidden" id="category" value="Pants" name="category">
-                <button class="button" type="submit">Try on</button>
-            </form>
-        </div>
-
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">SKIRT</h2>
-            <img src="../static/public/tryon-image/anh-tach-nen/Skirt/IMG_4986-1.png" alt="..." height="400" width="300">
-            <form action="/result" method="GET">
-                <input type="hidden" id="iid" value="IMG_4986-1.png" name="iid">
-                <input type="hidden" id="category" value="Skirt" name="category">
-                <button class="button" type="submit">Try on</button>
-            </form>
-        </div>
+          <div class="text-center">
+              <h2 class="section-heading text-uppercase">SKIRT</h2>
+              <img src="../static/public/anh-tach-nen/Skirt/IMG_4986-1.png" alt="..." height="200" width="200">
+              <div class="caption">
+                
+                      <input type="radio" id="iid_quan" value="4986" name="iid_quan">
+                      <label for="iid_quan">4986</label>
+                
+              </div>
+          </div>
+            <div class="container">
+                <div class="center">
+                    <input class="btn btn-success" type="submit" value="Try on" >
+                    <a class="product-link" data-toggle="modal" href="#productModal1">
+                        <button class="btn btn-success" type="submit">Result</button>
+                    </a>
+                </div> 
+            </div>
+        </form>
         <!--TODO: code snipte test for receieve event onclick listener via using modal-->
        <div class="product-modal modal fade" id="productModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="container">
                         <div class="modal-body">
-                            <img class="img-fluid" src="../static/public/tryon-image/anh-tach-nen/image.png" alt="..." width="2000px" height="2000px">
+                            <img class="aligh" src="../static/public/anh-tach-nen/image.png" alt="..." >
                         </div>
                     </div>
                 </div>
             </div>
        </div>
-       <script>
-           function perform_tryon(){
-               var iid = document.getElementById("iid").defaultValue
-               var category = document.getElementById("category").defaultValue
-               var formData = new FormData();
-               formData.append(iid);
-               formData.append(category);
-               var endpoint = "/result";
-               $.ajax({
-                   type: "GET",
-                   url: endpoint,
-                   data: formData,
-                   contentType: false,
-                   cache: false,
-                   processData: false,
-                   success: function(data) {
-                       swal("hello")
-                   }
 
-               });
-           }
-       </script>
+       <script src="../static/time.js"></script>
        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-     </body>
+       
+    </body>
  </html>
+
 
