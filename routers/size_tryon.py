@@ -7,6 +7,7 @@ import base64
 from os import replace
 from fastapi import APIRouter
 from fastapi import Request
+from starlette.responses import RedirectResponse
 from database.db import ItemTryon
 from database.db import UserDB, ItemDB
 from fastapi.responses import   FileResponse, HTMLResponse, JSONResponse
@@ -156,11 +157,15 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
     
 #     return {"iid_ao":items.iid_ao, "iid_quan": items.iid_quan}
 
+
 @router.get("/tryon_stateless/")
-async def api_get_result_main(iid_ao: Optional[str] = 300, iid_quan: Optional[str] = 300) -> dict:
+async def api_get_result_main(request: Request, iid_ao: Optional[str] = 300, iid_quan: Optional[str] = 300) -> dict:
     
     if iid_ao == 300 and iid_quan == 300:
         pass
     
     #return {"iid_ao":iid_ao, "iid_quan": iid_quan}
-    return FileResponse("static/public/anh-tach-nen/image.png")
+    #return FileResponse("static/public/anh-tach-nen/image.png")
+    
+    return templates.TemplateResponse("tryon-fix.html",{"request":request})
+    
