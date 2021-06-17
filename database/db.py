@@ -91,12 +91,18 @@ class ItemDB():
         new_item = self.collection.find_one({"_id": new_item.inserted_id})
         return norm_dict(new_item)
 
-    async def get_item_info(self, iid: str) -> dict:
-        item = self.collection.find_one({"itemId": iid})
+    # async def get_item_info(self, iid: str) -> dict:
+    #     item = self.collection.find_one({"itemId": iid})
+    #     if item:
+    #         return norm_dict(item)
+    #     return None
+
+    async def get_item_info(self, iid: int) -> dict:
+        item = self.collection.find_one({"iid":iid})
         if item:
             return norm_dict(item)
         return None
-    
+        
     async def update_item(self, iid: str, data: dict):
         item = self.collection.find_one({"itenId": iid})
         if item:

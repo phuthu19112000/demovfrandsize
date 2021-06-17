@@ -23,7 +23,7 @@ client = Client()
 it = ItemDB()
 
 src_result = "static/public/anh-tach-nen/"
-
+filename = 'static/public/anh-tach-nen/image.png'
 data = {
     "id_ao": None,
     "category_ao": None,
@@ -156,11 +156,31 @@ async def api_get_result_tryon(iid:str, category: str , request: Request):
     
 #     return {"iid_ao":items.iid_ao, "iid_quan": items.iid_quan}
 
+dress_dict = [4978,4991,4993,4998,5002,5004,5005,5016]
+
 @router.get("/tryon_stateless/")
-async def api_get_result_main(iid_ao: Optional[str] = 300, iid_quan: Optional[str] = 300) -> dict:
+async def api_get_result_main(request: Request,iid_ao: Optional[str] = "5010", iid_quan: Optional[str] = "4990") -> dict:
     
-    if iid_ao == 300 and iid_quan == 300:
-        pass
+    ao = await it.get_item_info(int(iid_ao))
+    quan = await it.get_item_info(int(iid_quan))
+    category_ao = ao["category"]
+    category_quan = quan["category"]
+
+    if int(iid_ao) in dress_dict:
+        url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(int(iid_ao),category_ao,int(iid_ao),category_ao,4985)
+        # response = requests.get(url=url)
+        # result = response.content
+        # image = base64.b64decode(result)
+        # with open(filename, 'wb') as f:
+        #     f.write(image)
+        return FileResponse("static/public/anh-tach-nen/image.png")
     
-    #return {"iid_ao":iid_ao, "iid_quan": iid_quan}
-    return FileResponse("static/public/anh-tach-nen/image.png")
+    else:
+        url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(int(iid_quan),category_quan,int(iid_ao),category_ao,4985)
+        # response = requests.get(url=url)
+        # result = response.content
+        # image = base64.b64decode(result)
+        # with open(filename,"wb") as f:
+        #     f.write(image)
+        return FileResponse("static/public/anh-tach-nen/image.png")
+   
