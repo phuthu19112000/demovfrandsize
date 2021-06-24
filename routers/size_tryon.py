@@ -7,9 +7,16 @@ from fastapi import status
 from typing import Optional
 from fastapi import APIRouter
 from fastapi import Request
+<<<<<<< HEAD
 from database.db import ItemDB
 from fastapi import HTTPException
 from fastapi.responses import HTMLResponse
+=======
+from starlette.responses import RedirectResponse
+from database.db import ItemTryon
+from database.db import UserDB, ItemDB
+from fastapi.responses import   FileResponse, HTMLResponse, JSONResponse
+>>>>>>> 84d14b3df81003b16031d2bd029cd2c80b48d707
 from fastapi.encoders import jsonable_encoder
 from fastapi.templating import Jinja2Templates
 from recom_client_api.client_api import Client
@@ -158,7 +165,9 @@ async def api_get_result_tryon(iid_ao: Optional[str]= Query("5010",\
         except requests.exceptions.RequestException as e:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
 
+
 @router.get("/tryon_stateless/")
+<<<<<<< HEAD
 async def api_get_result_main(in_or_out: Optional[str] = "False", iid_ao: Optional[str] = "5010", iid_quan: Optional[str] = "4990"):
 
     # iid_ao = iid_ao.encode("windows-1252").decode("utf-8")
@@ -179,6 +188,9 @@ async def api_get_result_main(in_or_out: Optional[str] = "False", iid_ao: Option
             f.write(image)
         return FileResponse("static/public/anh-tach-nen/image.png")
        
+=======
+async def api_get_result_main(request: Request, iid_ao: Optional[str] = 300, iid_quan: Optional[str] = 300) -> dict:
+>>>>>>> 84d14b3df81003b16031d2bd029cd2c80b48d707
     
     else:
         url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(int(iid_quan),category_quan,int(iid_ao),category_ao,4985)
@@ -191,4 +203,11 @@ async def api_get_result_main(in_or_out: Optional[str] = "False", iid_ao: Option
 
 
     
+<<<<<<< HEAD
+=======
+    #return {"iid_ao":iid_ao, "iid_quan": iid_quan}
+    #return FileResponse("static/public/anh-tach-nen/image.png")
+    
+    return templates.TemplateResponse("tryon-fix.html",{"request":request})
+>>>>>>> 84d14b3df81003b16031d2bd029cd2c80b48d707
     
