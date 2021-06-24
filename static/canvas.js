@@ -30,6 +30,13 @@ function failed() {
     console.error("The provided file couldn't be loaded as an Image media");
 }
 
+// function draw_image() {
+//   var canvas = document.getElementById
+//   ReadableStream.ReadableStream(imageFile);
+//   ReadableStream.onloaded = function (e){
+//     PaymentAddress
+//   }
+// }
 
 
 /*

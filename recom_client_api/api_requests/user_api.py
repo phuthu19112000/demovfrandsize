@@ -16,13 +16,13 @@ class AddUser(Request):
 
         return self.data
 
-class GetUserValues(Request):
+class GetValues(Request):
 
-    def __init__(self, user_id):
-        self.user_id = user_id
+    def __init__(self, data):
+        self.data = data
 
         self.method = 'get'
-        self.uri_path = f'/users/{self.user_id}'
+        self.uri_path = f'/users'
 
     def get_query_parameters(self):
-        return self.param
+        return self.data

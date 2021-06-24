@@ -1,0 +1,109 @@
+**************************Note broker config*******************************
+
+- broker.id: The broker id for this server. If unset, a unique broker id will be generated.To avoid conflicts between zookeeper generated broker id's 
+                and user configured broker id's, generated broker ids start from reserved.broker.max.id + 1.
+- log.dirs
+- zookeeper.connect
+
+- advertised.listeners: Listeners to publish to ZooKeeper for clients to use, if different than the listeners config property. In IaaS environments, 
+        this may need to be different from the interface to which the broker binds. If this is not set, the value for listeners will be used. Unlike listeners, 
+        it is not valid to advertise the 0.0.0.0 meta-address.
+
+- auto.create.topics.enable: Enable auto creation of topic on the server
+
+- background.threads: The number of threads to use for various background processing tasks
+
+- log.flush.interval.messages: The number of messages accumulated on a log partition before messages are flushed to disk
+
+- log.flush.interval.ms: The maximum time in ms that a message in any topic is kept in memory before flushed to disk. 
+        If not set, the value in log.flush.scheduler.interval.ms is used
+
+- min.insync.replicas: When a producer sets acks to "all" (or "-1"), min.insync.replicas specifies the minimum number of replicas that must acknowledge 
+        a write for the write to be considered successful. If this minimum cannot be met, then the producer will raise an exception (either NotEnoughReplicas or 
+        NotEnoughReplicasAfterAppend).When used together, min.insync.replicas and acks allow you to enforce greater durability guarantees. 
+        A typical scenario would be to create a topic with a replication factor of 3, set min.insync.replicas to 2, and produce with acks of "all". 
+        This will ensure that the producer raises an exception if a majority of replicas do not receive a write.
+
+- offsets.commit.timeout.ms: Offset commit will be delayed until all replicas for the offsets topic receive the commit or this timeout is reached. 
+        This is similar to the producer request timeout.
+
+- offsets.retention.minutes: After a consumer group loses all its consumers (i.e. becomes empty) its offsets will be kept for this retention period 
+        before getting discarded. For standalone consumers (using manual assignment), offsets will be expired after the time of last commit plus this retention period.
+
+- request.timeout.ms: The configuration controls the maximum amount of time the client will wait for the response of a request. 
+        If the response is not received before the timeout elapses the client will resend the request if necessary or fail the request if retries are exhausted
+
+**************************Note consumer config***********************************
+
+- group.id: A unique string that identifies the consumer group this consumer belongs to. This property is required if the consumer uses either the group 
+        management functionality by using subscribe(topic) or the Kafka-based offset management strategy.
+
+- fetch_max_wait_ms (int) – The maximum amount of time in milliseconds the server will block before answering the fetch request 
+        if there isn’t sufficient data to immediately satisfy the requirement given by fetch_min_bytes. Default: 500.
+
+- fetch_max_bytes (int) – The maximum amount of data the server should return for a fetch request. This is not an absolute maximum, 
+        if the first message in the first non-empty partition of the fetch is larger than this value, the message will still 
+        be returned to ensure that the consumer can make progress. NOTE: consumer performs fetches to multiple brokers in parallel so memory usage will 
+        depend on the number of brokers containing partitions for the topic. Supported Kafka version >= 0.10.1.0. Default: 52428800 (50 MB).  
+
+- request_timeout_ms (int) – Client request timeout in milliseconds. Default: 305000.
+
+- auto_offset_reset (str) – A policy for resetting offsets on OffsetOutOfRange errors: ‘earliest’ will move to the oldest available message, 
+        ‘latest’ will move to the most recent. Any other value will raise the exception. Default: ‘latest’.
+
+- enable_auto_commit (bool) – If True , the consumer’s offset will be periodically committed in the background. Default: True.
+
+- auto_commit_interval_ms (int) – Number of milliseconds between automatic offset commits, if enable_auto_commit is True. Default: 5000.
+
+- heartbeat_interval_ms (int) – The expected time in milliseconds between heartbeats to the consumer coordinator when using Kafka’s group management facilities. 
+        Heartbeats are used to ensure that the consumer’s session stays active and to facilitate rebalancing when new consumers join or leave the group. 
+        The value must be set lower than session_timeout_ms, but typically should be set no higher than 1/3 of that value. 
+        It can be adjusted even lower to control the expected time for normal rebalances. Default: 3000
+
+**************************Note Kafka connect config******************************
+- offset.storage.topic: The name of the Kafka topic where connector offsets are stored
+
+- status.storage.topic: The name of the Kafka topic where connector and task status are stored
+
+- session.timeout.ms: The timeout used to detect worker failures. The worker sends periodic heartbeats to indicate its liveness to the broker. 
+        If no heartbeats are received by the broker before the expiration of this session timeout, 
+        then the broker will remove the worker from the group and initiate a rebalance. Note that the value must be in 
+        the allowable range as configured in the broker configuration by group.min.session.timeout.ms and group.max.session.timeout.ms.
+
+- request.timeout.ms: The configuration controls the maximum amount of time the client will wait for the response of a request. 
+        If the response is not received before the timeout elapses the client will resend the request if necessary or fail the request if retries are exhausted.
+
+************************Note Source Connector Configs****************************
+
+- transforms: Aliases for the transformations to be applied to records.
+
+- These and other related connector configuration properties can be changed to provide different behavior. 
+        For example, the following configuration properties can be added to a connector configuration to setup error handling with multiple retries, 
+        logging to the application logs and the my-connector-errors Kafka topic, 
+        and tolerating all errors by reporting them rather than failing the connector task:
+
+        # retry nhiều nhất 10 phút mot lần, chờ tối đa 30 giây giữa các lần thất bại liên tiếp
+        errors.retry.timeout=600000
+        errors.retry.delay.max.ms=30000
+
+        # log error context along with application logs, but do not include configs and messages
+        errors.log.enable=true
+        errors.log.include.messages=false
+
+        # produce error context into the Kafka topic
+        errors.deadletterqueue.topic.name=my-connector-errors
+
+        # Tolerate all errors.
+        errors.tolerance=all
+
+***********************************************FunctionList*******************************************************
+
+1. Thiet ke lai giao dien Web cho qua trinh kiểm tra mới (Done)
+2. Viết code và config Kafka sync data giữa ecommerce và recommend (90%)
+3. Viết code và config Kafka sync data giữa ecommerce và vfr (90%)
+4. Trao đổi với bên phía ecommerce về việc lưu các thông tin cần đồng bộ trong db magento
+5. Gen thêm các dữ liệu cần thiết và đẩy vào mongodb vfr, cân nhắc việc đặt bên phía nguyên hay mình sẽ làm (keypoint, contour)
+6. Viết code xác thực tất cả data cần thiết đã được xử lý thành công, gửi request sang phía nguyên và phi trong một khoảng tg 
+        nhất định khi có data mới (yêu cầu cung cấp đầu API)
+7. Thiết kế lại API size recommendation: input(uid,category)->best size (Done)
+8. Thiết kế lại API VFR: input(iid_ao,iid_quan,in_or_out)->result image (Done)

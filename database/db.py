@@ -2,7 +2,7 @@ from pydantic.errors import NotNoneError
 from pydantic.types import Json
 from pymongo import MongoClient, message
 from bson.objectid import ObjectId
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from database.utils import norm_dict
 from typing import Optional
 
@@ -123,6 +123,47 @@ class ItemDB():
         return False 
 
 
+class CityDB():
+
+    __metaclass__ = Singleton
+
+    def __init__(self, url = URL, db_name = NAME_DB):
+        self.database = MongoClient(url)[db_name]
+        self.collection = self.database["category"]
+
+    async def add_item(self,data:dict):
+        item =  self.collection.find_one({"category_id":data["category_id"]})
+        if item:
+            return None
+        new_item = self.collection.insert_one(data)
+        new_item = self.collection.find_one({"_id": new_item.inserted_id})
+        return norm_dict(new_item)
+
+    async def get_item_info(self, iid: str) -> dict:
+        item = self.collection.find_one({"category_id": iid})
+        if item:
+            return norm_dict(item)
+        return None
+    
+    async def update_item(self, iid: str, data: dict):
+        item = self.collection.find_one({"category_id": iid})
+        if item:
+            is_update = self.collection.update_one(
+                {"_id": item["_id"]}, {"$set": data}
+            )
+            if is_update:
+                return True
+            else:
+                return False
+        return False
+
+    async def del_item(self, iid: str):
+        item = self.collection.find_one({"category_id": iid})
+        if item:
+            self.collection.delete_one({"_id":item["_id"]})
+            return True
+        return False 
+
 class UserSchema(BaseModel):
     userId: str
     sex: str
@@ -132,7 +173,6 @@ class ItemSchema(BaseModel):
     name_image: str
     category: str
     path_base: str
-    
     allow: str
 
 class ItemTryon(BaseModel):

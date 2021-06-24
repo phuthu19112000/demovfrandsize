@@ -1,9 +1,9 @@
 import json
 import requests
-
+from fastapi import HTTPException
 #from client_api.api_requests import *
-from recom_client_api.exceptions import ApiTimeoutException
-
+from recom_client_api.exceptions import ApiTimeoutException, ResponseException
+from fastapi import status
 try:
     from urllib import quote
 except ImportError:
@@ -12,20 +12,23 @@ except ImportError:
 
 class Client:
 
-    def __init__(self, protocol='http://', base_uri='192.168.50.69:5849'):
+    def __init__(self, protocol='http://', base_uri='192.168.50.69:5849/ping'):
         self.protocol = protocol
         self.base_uri = base_uri
 
     def send(self, request):
-        timeout = request.timeout
+        timeout = request.timeout   
         uri = self.__process_request_uri(request)
 
         try:
             method = getattr(self, f'_{request.method}')
-            print(uri)
-            return method(request, uri, timeout)
+            print(method)
+            response = method(request, uri, timeout)
+            return response
         except requests.exceptions.Timeout:
-            raise ApiTimeoutException(request)
+            return HTTPException(status_code=status.HTTP_408_REQUEST_TIMEOUT)
+        except requests.exceptions.RequestException as e:
+            return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail = e)
 
     def _get(self, request, uri, timeout):
         response = requests.get(uri,

@@ -1,0 +1,28 @@
+# Doi với thân trên, nên đo cả chiều dài cánh tay
+male:
+  top:
+    jackets: chest,height,waist
+    blazer: chest,waist,height
+    overcoats: chest,height
+    sweaters: chest,height
+    t-shirts: chest,height
+    shirts: neck,chest,height
+  bottom:
+    trousers: waist,height,inside_leg
+    shorts: waist,height,inside_leg
+    underpants: waist,height
+female:
+  top:
+    jackets: bust,height,hip
+    blazer: bust,height,hip
+    overcoats: bust,height
+    dresses: bust,height,hip,waist
+    sweaters: bust,height
+    t-shirts: bust,height
+    corsetry: underbust,bust,height,hip,waist
+    bras: underbust,bust,cup
+  bottom:
+    skirts: waist,height,hip
+    trousers: waist,height,hip,inside_leg
+    shorts: waist,height,hip,inside_leg
+    underpants: waist,height,hip
