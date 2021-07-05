@@ -1,7 +1,6 @@
 {
-<<<<<<< HEAD
-    "python.pythonPath": "d:\\fastapi\\Scripts\\python.exe"
-=======
-    "python.pythonPath": "C:\\Users\\Admin\\anaconda3\\envs\\mflix\\python.exe"
->>>>>>> 84d14b3df81003b16031d2bd029cd2c80b48d707
+
+    "python.pythonPath": "D:\\fastapi\\Scripts\\python.exe",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "none"}
 }

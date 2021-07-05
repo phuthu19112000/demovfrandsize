@@ -6,8 +6,9 @@ from pydantic import BaseModel, Field
 from database.utils import norm_dict
 from typing import Optional
 
-URL = "mongodb+srv://hieule:0982298387@cluster0.qbwn8.gcp.mongodb.net"
-NAME_DB = "ecommerce"
+#URL = "mongodb+srv://hieule:0982298387@cluster0.qbwn8.gcp.mongodb.net"
+URL = "mongodb://118.70.181.146:2100"
+NAME_DB = "magento2"
 
 class PyObjectId(ObjectId):
     @classmethod
@@ -41,25 +42,26 @@ class UserDB():
         self.collection = self.database["users"]
     
 
-    async def add_user(self, data: dict):
-        user = self.collection.find_one({"userId": data["userId"]})
+    def add_user(self, data: dict):
+        user = self.collection.find_one({"id": data["userId"]})
         if user:
             return None
         new_user = self.collection.insert_one(data)
         new_user = self.collection.find_one({"_id": new_user.inserted_id})
         return norm_dict(new_user)
     
-    async def get_user_info(self, uid:str) -> dict:
-        user = self.collection.find_one({"userId":uid})
+    def get_user_info(self, uid:str) -> dict:
+        
+        user = self.collection.find_one({"id":uid})
         if user:
             return norm_dict(user)
         return None
     
-    async def update_user(self, uid:str, data:dict):
-        user = self.collection.find_one({"userId":uid})
+    def update_user(self, uid:str, data:dict):
+        user = self.collection.find_one({"id":uid})
         if user:
             is_update = self.collection.update_one(
-                {"_id":user["_id"]}, {"$ser":data}
+                {"_id":user["_id"]}, {"$set":data}
             )
             if is_update:
                 return True
@@ -67,8 +69,8 @@ class UserDB():
                 return False
         return False
     
-    async def del_user(self, uid:str):
-        user = self.collection.find_one({"userId":uid})
+    def del_user(self, uid:str):
+        user = self.collection.find_one({"id":uid})
         if user:
             self.collection.delete_one({"_id":user["_id"]})
             return True
@@ -129,24 +131,24 @@ class CityDB():
 
     def __init__(self, url = URL, db_name = NAME_DB):
         self.database = MongoClient(url)[db_name]
-        self.collection = self.database["category"]
+        self.collection = self.database["items"]
 
-    async def add_item(self,data:dict):
-        item =  self.collection.find_one({"category_id":data["category_id"]})
+    def add_item(self,data:dict):
+        item = self.collection.find_one({"entity_id":data["entity_id"]})
         if item:
             return None
         new_item = self.collection.insert_one(data)
         new_item = self.collection.find_one({"_id": new_item.inserted_id})
         return norm_dict(new_item)
 
-    async def get_item_info(self, iid: str) -> dict:
-        item = self.collection.find_one({"category_id": iid})
+    def get_item_info(self, iid: str) -> dict:
+        item = self.collection.find_one({"entity_id": iid})
         if item:
             return norm_dict(item)
         return None
     
-    async def update_item(self, iid: str, data: dict):
-        item = self.collection.find_one({"category_id": iid})
+    def update_item(self, iid: str, data: dict):
+        item = self.collection.find_one({"entity_id": iid})
         if item:
             is_update = self.collection.update_one(
                 {"_id": item["_id"]}, {"$set": data}
@@ -157,12 +159,53 @@ class CityDB():
                 return False
         return False
 
-    async def del_item(self, iid: str):
-        item = self.collection.find_one({"category_id": iid})
+    def del_item(self, iid: str):
+        item = self.collection.find_one({"entity_id": iid})
         if item:
             self.collection.delete_one({"_id":item["_id"]})
             return True
         return False 
+
+class Att2value():
+    __metaclass__ = Singleton
+
+    def __init__(self, url = URL, db_name = NAME_DB):
+        self.database = MongoClient(url)[db_name]
+        self.collection = self.database["attribute_id2value"]
+
+    def add_item(self,data:dict):
+        item = self.collection.find_one({"attribute_id":data["attribute_id"]})
+        if item:
+            return None
+        new_item = self.collection.insert_one(data)
+        new_item = self.collection.find_one({"_id": new_item.inserted_id})
+        return norm_dict(new_item)
+
+    def get_item_info(self, iid: str) -> dict:
+        item = self.collection.find_one({"attribute_id": iid})
+        if item:
+            return norm_dict(item)
+        return None
+    
+    def update_item(self, iid: str, data: dict):
+        item = self.collection.find_one({"attribute_id": iid})
+        if item:
+            is_update = self.collection.update_one(
+                {"_id": item["_id"]}, {"$set": data}
+            )
+            if is_update:
+                return True
+            else:
+                return False
+        return False
+
+    def del_item(self, iid: str):
+        item = self.collection.find_one({"attribute_id": iid})
+        if item:
+            self.collection.delete_one({"_id":item["_id"]})
+            return True
+        return False 
+
 
 class UserSchema(BaseModel):
     userId: str

@@ -96,14 +96,144 @@
         # Tolerate all errors.
         errors.tolerance=all
 
-***********************************************FunctionList*******************************************************
+#################### Benchmarking #####################
 
-1. Thiet ke lai giao dien Web cho qua trinh kiểm tra mới (Done)
-2. Viết code và config Kafka sync data giữa ecommerce và recommend (90%)
-3. Viết code và config Kafka sync data giữa ecommerce và vfr (90%)
-4. Trao đổi với bên phía ecommerce về việc lưu các thông tin cần đồng bộ trong db magento
-5. Gen thêm các dữ liệu cần thiết và đẩy vào mongodb vfr, cân nhắc việc đặt bên phía nguyên hay mình sẽ làm (keypoint, contour)
-6. Viết code xác thực tất cả data cần thiết đã được xử lý thành công, gửi request sang phía nguyên và phi trong một khoảng tg 
-        nhất định khi có data mới (yêu cầu cung cấp đầu API)
-7. Thiết kế lại API size recommendation: input(uid,category)->best size (Done)
-8. Thiết kế lại API VFR: input(iid_ao,iid_quan,in_or_out)->result image (Done)
+1. Run a single producer client on a single server and measure the resulting throughput using
+the available JMX metrics for the Kafka producer. Repeat the producer benchmarking test,
+increasing the number of producer processes on the server in each interation to determine
+the number of producer processes per server to achieve the highest throughput
+2. Determine the baseline output performance profile for a given consumer in a similar way.
+Run a single consumer client on a single server and repeat this test, increasing the number
+of consumer processes per server to achieve the highest throughput
+3. Run benchmark tests for different permutaions of configuration parameters that reflect your
+services goal . Focus on a subset of configuration parameters
+
+##################### Determining your service Goals #########################
+Decide which service goals to optimize -> Configure Kafka cluster and clients -> Benchmark, monitor, and tune
+
+It is important that you discuss the original  business use cases and main goals with your
+team for the following two reason:
+- Unable to maximize all goals at the same time. You may be familiar with the common trade-offset
+in performance between throughput and latency and perhaps between durability and availibility
+as well
+- You must identify the service goals you want to optimize so you can tune your Kafka config
+parameters to achieve them:
+        + Do you want to optimize for high throughput, which is the rate that data is moved
+        from producers to brokers or brokers to consumers.
+        + Do you want to optimize for low latency, which is the time elapsed moving messages
+        end to end (producers->broker->consumers)?
+        + Do you want to optimize for high durability, which guarantees that committted
+        messages will not be lost ?
+        + Do you want to optimize for high availibility, which minimizes downtime in case of
+        unexpected failures ?
+
+#################### Optimizing performance for apache Kafka ######################
+1. Optimizing for Throughput
+
+To optimize for Throughput, producers and consumers must move as much data as possible within
+a given amount of time. For high throughput, try maximizing the rate at which the data moves.
+
+a. Number of partitions
+There are trade-offs to increasing the number of partitions. Be sure to choose the partition 
+count based on producer throughput and consumer throughput, and bendchmark performance in your
+environments
+link:(https://www.confluent.io/blog/how-choose-number-topics-partitions-kafka-cluster/?_ga=2.148803572.2108300758.1625038063-218728915.1618299640&_gac=1.89329257.1624003597.CjwKCAjwiLGGBhAqEiwAgq3q_tTl1wJIkR7n1fwNL4Z6xR6WA0ZiU-jfH_wHySXWGFiyCf8oEBRvnBoC-fgQAvD_BwE)
+
+b. Batching Meassages
+With Batching of Kafka producers, can batch messages going to the same partition, which mean they
+collect multiple messages to send together in a single request. Large batch size help reduce load
+on producers and the broker CPU overhead to process request.
+Parameter to note:
+        -batch.size : increase the maximum size in bytes of each message batch
+        -linger.ms : to have the producer wait longer before sending. The delay allows the 
+                     producer to wait for the batch to reach the configured batch.size
+
+c. Compression
+Which means many bits can be sent as fewer bits. Enable Compression by config compression.type with:
+        - lz4
+        - snappy
+        - zstd
+        - gzip
+        - lz4 (recommend for performance)
+
+d. Producer acks
+The sooner a producer  receives a response, the sooner the producer can send the next message,
+which generally results in higher throughput.  So producers can set the configuration parameter
+acks to specify the number of acknowledgments the leader broker must have received before
+responding to the producer with an acknowledgment. Set acks=1
+
+e. Memory Allocation
+Kafka producers automatically allocate memory for the Java client to store unsent messages. You can
+adjust how much memory is allocated with the configuration parameter buffer.memory. If you don't 
+have a lot of partitions, you may not need to adjust this at all.
+
+f. Consumer fetching
+Another way to optimize for throughput is adjust how much data consumers receive from each fetch
+from the leader broker. You can increase how much data the consumers get from the leader for each 
+fetch request by increasing the configuration parameter fetch.min.bytes
+
+g summary
+- Producer
+batch.size: increase to 100000–200000 (default 16384)
+linger.ms: increase to 10–100 (default 0)
+compression.type=lz4 (default none, for example, no compression)
+acks=1 (default 1)
+buffer.memory: increase if there are a lot of partitions (default 33554432)
+- Consumer
+fetch.min.bytes: increase to ~100000 (default 1)
+
+2 . Optimizing for latency
+a. Producer acks
+there is a trade-off for an increased number of partitions, and that's increased latency. It may
+take longer to replicate several partitions shared between each pair of brokers and consequently take
+longer for messageses to be considered commited. No message can be consumed until it is committed
+so this can ultimately increase end-to-end latency
+
+b. Batching Messages
+Producer automatically batch messages, which means they collect messages to send together. If 
+there is less time given waiting for those batches to fill, then there is less latency producing
+data. By default, the producer is tuned for low latency and the configuration parameter linger.ms
+is set to 0 - the producer sends data as soon as it has data to send.
+
+c. Compression
+compression.type=none
+
+d. Producer acks
+Depending on your application requirement, you can set acks=0 so that the producer won't wait 
+for a response for a producer request from the broker, but then messages can potentially get 
+lost without the producer knowing
+
+e. Consumer fetching
+fetch.min.bytes=1
+
+f. Summary
+- Producer
+linger.ms=0 (default 0)
+compression.type=none (default none, meaning no compression)
+acks=1 (default 1)
+
+- Consumer
+fetch.min.bytes=1 (default 1)
+
+3. Optimizing for Durability 
+Summary of Configurations for Optimizing Durability
+- Producer 
+replication.factor=3
+acks=all (default 1)
+enable.idempotence=true (default false), to prevent duplicate messages and out-of-order messages
+max.in.flight.requests.per.connection=1 (default 5), to prevent out of order messages when not using an idempotent producer
+
+- Consumer
+enable.auto.commit=false (default true)
+isolation.level=read_committed (when using EOS transactions)
+
+4. Optimizing for Availability
+a. Consumer Failures
+Consumers in a consumer group can share processing load. If a consumer unexpectedly fails, Kafka
+can detect the failure and rebalance the partitions amongst the remaining consumers in the consumer
+group. The consumer failures can be hard failures (ex: SIGKILL) or soft failures (ex: expired
+session timeouts). These failures can be detected either when consumers fail to send hearbeats or
+when they fail to send poll() calls, the configuration parameter session.timeout.ms dictates
+the timeout used to detect failed heartbeats
+
+session.timeout.ms: increase (default 10000)
