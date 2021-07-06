@@ -151,7 +151,7 @@ class CityDB():
         item = self.collection.find_one({"entity_id": iid})
         if item:
             is_update = self.collection.update_one(
-                {"_id": item["_id"]}, {"$set": data}
+                {"_id": item["_id"]}, {"$set": {"type_id":data["type_id"], "sku":data["sku"]}}
             )
             if is_update:
                 return True

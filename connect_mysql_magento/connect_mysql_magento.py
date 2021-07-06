@@ -9,7 +9,8 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-# mycursor.execute("select * from eav_attribute_option_value")
-# print(mycursor.column_names)
-# for i in mycursor:
-#     print(i)
+mycursor.execute("select value from catalog_product_entity_media_gallery where value_id=104")
+
+for i in mycursor:
+  print(i[0])
+# print(mycursor.value())
